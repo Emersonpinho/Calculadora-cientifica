@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Científica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(270deg, #ff7e5f, #feb47b);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .calculator {
+            background-color: rgba(51, 51, 51, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .screen {
+            width: 96%;
+            padding: 5px;
+            font-size: 30px;
+            text-align: right;
+            margin-bottom: 30px;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 50px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="screen" class="screen" disabled>
+        <div class="buttons">
+            <button onclick="clearScreen()">C</button>
+            <button onclick="deleteChar()">DEL</button>
+            <button onclick="inputValue('%')">%</button>
+            <button onclick="inputValue('/')">/</button>
+            <button onclick="inputValue('7')">7</button>
+            <button onclick="inputValue('8')">8</button>
+            <button onclick="inputValue('9')">9</button>
+            <button onclick="inputValue('*')">*</button>
+            <button onclick="inputValue('4')">4</button>
+            <button onclick="inputValue('5')">5</button>
+            <button onclick="inputValue('6')">6</button>
+            <button onclick="inputValue('-')">-</button>
+            <button onclick="inputValue('1')">1</button>
+            <button onclick="inputValue('2')">2</button>
+            <button onclick="inputValue('3')">3</button>
+            <button onclick="inputValue('+')">+</button>
+            <button onclick="inputValue('0')">0</button>
+            <button onclick="inputValue('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="inputValue('Math.sqrt(')">√</button>
+            <button onclick="inputValue('Math.pow(')">x²</button>
+            <button onclick="inputValue('Math.sin(')">sin</button>
+            <button onclick="inputValue('Math.cos(')">cos</button>
+            <button onclick="inputValue('Math.tan(')">tan</button>
+            <button onclick="inputValue('Math.log(')">log</button>
+        </div>
+    </div>
+
+    <script>
+        function inputValue(value) {
+            document.getElementById("screen").value += value;
+        }
+
+        function clearScreen() {
+            document.getElementById("screen").value = '';
+        }
+
+        function deleteChar() {
+            let currentValue = document.getElementById("screen").value;
+            document.getElementById("screen").value = currentValue.slice(0, -1);
+        }
+
+        function calculate() {
+            let expression = document.getElementById("screen").value;
+            try {
+                let result = eval(expression);
+                document.getElementById("screen").value = result;
+            } catch {
+                document.getElementById("screen").value = 'Erro';
+            }
+        }
+    </script>
+</body>
+</html>
